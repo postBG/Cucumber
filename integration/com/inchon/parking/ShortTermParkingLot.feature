@@ -3,7 +3,7 @@ Feature: 단기 주차장의 평일 요금을 계산한다.
  여기에 사용자 스토리를 적어주세요...
 
  Scenario Outline: 단기 주차장에 주차한 경우 주차 요금을 계산한다.
-  When 나는 평일에 단기 주차장에 <duration>간 주차한다.
+  When 나는 평일에 단기 주차장에 <duration>동안 주차한다.
   Then 나는 주차요금으로 <cost>원을 지불해야 한다.
   Examples:
   | duration | cost |
@@ -21,7 +21,7 @@ Feature: 단기 주차장의 평일 요금을 계산한다.
   |	3일 1분     | 37200 |   
 
  Scenario Outline: 단기 주차장에 주차한 경우 주차 요금을 계산한다.
-  When 나는 주말에 단기 주차장에 <duration>간 주차한다.
+  When 나는 주말에 단기 주차장에 <duration>동안 주차한다.
   Then 나는 주차요금으로 <cost>원을 지불해야 한다.
   Examples:
   | duration | cost |
@@ -39,7 +39,7 @@ Feature: 단기 주차장의 평일 요금을 계산한다.
    |	3일 1분     | 43400 |
 
  Scenario Outline: 단기 주차장에 주차한 경우 주차 요금을 계산한다.
-  When 나는 주말과 평일 혼합하여 단기 주차장에 <duration>간 주차한다.
+  When 나는 주말과 평일 혼합하여 단기 주차장에 <duration>동안 주차한다.
   Then 나는 주차요금으로 <cost>원을 지불해야 한다.
   Examples:
   | duration | cost |

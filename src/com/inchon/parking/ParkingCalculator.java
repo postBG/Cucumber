@@ -5,6 +5,8 @@ public class ParkingCalculator {
 	public Integer calculate(Integer durationInMinutes) {
 		int cost = 0;
 		
+		if ( durationInMinutes >= 5*60 )
+			return 12000;
 		if ( durationInMinutes >= 31 ) {
 			cost += ((durationInMinutes-30-1)/15+1)*600;
 		}

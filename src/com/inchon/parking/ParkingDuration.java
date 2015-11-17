@@ -4,9 +4,15 @@ public class ParkingDuration {
 
 	private String dayType;
 	private int durationInMinutes;
+	private boolean weekend;
 
 	public ParkingDuration(String dayType, int durationInMinutes) {
 		this.dayType = dayType;
+		this.durationInMinutes = durationInMinutes;
+	}
+
+	public ParkingDuration(boolean weekend, Integer durationInMinutes) {
+		this.weekend = weekend;
 		this.durationInMinutes = durationInMinutes;
 	}
 
@@ -16,6 +22,10 @@ public class ParkingDuration {
 
 	public String getDayType() {
 		return dayType;
+	}
+
+	public boolean isWeekend() {
+		return weekend;
 	}
 
 }

@@ -20,5 +20,9 @@ public class ParkingCalculatorTest {
 		assertThat(parkingCalculator.calculate(30),is(1200));
 	}
 	
+	@Test
+	public void priceFor31() {
+		assertThat(parkingCalculator.calculate(31),is(1800));
+	}
 	
 }

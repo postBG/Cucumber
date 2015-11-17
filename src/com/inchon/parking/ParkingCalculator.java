@@ -3,9 +3,7 @@ package com.inchon.parking;
 public class ParkingCalculator {
 
 	public Integer calculate(Integer durationInMinutes) {
-		if ( durationInMinutes == 2 )
-			return 1200;
-		if ( durationInMinutes == 1 )
+		if ( durationInMinutes >= 1 )
 			return 1200;
 		return 0;
 	}

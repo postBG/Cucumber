@@ -3,7 +3,9 @@ package com.inchon.parking;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.is;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cucumber.api.PendingException;
@@ -26,11 +28,14 @@ public class ShortTermParkingLotStepDefinitions {
 			put("1일 31분",new TimeInterval("2015-11-16 00:00:00","2015-11-17 00:31:00"));
 			put("2일 1분",new TimeInterval("2015-11-16 00:00:00","2015-11-18 00:1:00"));
 			put("3일 1분",new TimeInterval("2015-11-16 00:00:00","2015-11-19 00:1:00"));
+			put("평일 1분 주말 1분",new TimeInterval("2015-11-16 23:59:00","2015-11-17 00:1:00"));
+			put("주말 1분 평일 1분",new TimeInterval("2015-11-17 23:59:00","2015-11-18 00:1:00"));
 		}
 	};
 	private Integer durationInMinutes;
 	private String durationType;
 	private TimeInterval timeInterval;
+	private List<ParkingDuration> parkingDurations;
 
 	@When("^나는 평일에 단기 주차장에 (.*)동안 주차한다\\.$")
 	public void 나는_평일에_단기_주차장에_동안_주차한다(String duration) throws Throwable {
@@ -50,6 +55,8 @@ public class ShortTermParkingLotStepDefinitions {
 	public void 나는_주말과_평일_혼합하여_단기_주차장에_동안_주차한다(String duration) throws Throwable {
 		timeInterval = durationMap.get(duration);
 		durationType = "혼합";
+		
+		parkingDurations = timeInterval.durationList();
 	}	
 	
 	@Then("^나는 주차요금으로 (\\d+)원을 지불해야 한다\\.$")
@@ -65,13 +72,18 @@ public class ShortTermParkingLotStepDefinitions {
 		else {
 			int cost = 0;
 
-			int weekDayDuration = 1;
-			ParkingCalculator weekDayParkingCalculator = ParkingCalculator.createWeekDayParkingCalculator();
-			cost += weekDayParkingCalculator.calculate(weekDayDuration);
+			parkingDurations = new ArrayList<>();
 			
-			int weekEndDuration = 1;
-			ParkingCalculator weekEndparkingCalculator = ParkingCalculator.createWeekendParkingCalculator();
-			cost += weekEndparkingCalculator.calculate(weekEndDuration);
+			for ( ParkingDuration parkingDuration : parkingDurations ) {
+				if ( "평일".equals(parkingDuration.getDayType()) ) {
+					ParkingCalculator weekDayParkingCalculator = ParkingCalculator.createWeekDayParkingCalculator();
+					cost += weekDayParkingCalculator.calculate(parkingDuration.getDurationInMinutes());
+				}
+				else {
+					ParkingCalculator weekEndparkingCalculator = ParkingCalculator.createWeekendParkingCalculator();
+					cost += weekEndparkingCalculator.calculate(parkingDuration.getDurationInMinutes());
+				}
+			}
 			
 			assertThat(cost,is(expectedPrice));
 		}

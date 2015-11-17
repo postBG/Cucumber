@@ -1,5 +1,7 @@
 package com.inchon.parking;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.format.DateTimeFormat;
@@ -19,6 +21,10 @@ public class TimeInterval {
 	public Integer durationInMinutes() {
 		Duration duration = new Duration(startDate,endDate);
 		return (int)duration.getStandardMinutes();
+	}
+
+	public List<ParkingDuration> durationList() {
+		return null;
 	}
 
 }

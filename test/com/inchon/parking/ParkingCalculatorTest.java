@@ -42,5 +42,11 @@ public class ParkingCalculatorTest {
 		assertThat(parkingCalculator.calculate(24*60+1),is(13200));
 		assertThat(parkingCalculator.calculate(2*24*60+1),is(25200));
 	}
+	
+	@Test
+	public void priceForWeekend() {
+		parkingCalculator = ParkingCalculator.createWeekendParkingCalculator();
+		assertThat(parkingCalculator.calculate(1),is(1400));
+	}
 
 }

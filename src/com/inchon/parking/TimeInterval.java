@@ -23,7 +23,7 @@ public class TimeInterval {
 		return (int)duration.getStandardMinutes();
 	}
 
-	public List<ParkingDuration> durationList() {
+	public List<ParkingDuration> durationList(TimeService timeService) {
 		return null;
 	}
 

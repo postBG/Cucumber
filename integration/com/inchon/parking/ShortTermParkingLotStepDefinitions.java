@@ -56,7 +56,7 @@ public class ShortTermParkingLotStepDefinitions {
 		timeInterval = durationMap.get(duration);
 		durationType = "혼합";
 		
-		parkingDurations = timeInterval.durationList();
+		parkingDurations = timeInterval.durationList(new TimeService());
 	}	
 	
 	@Then("^나는 주차요금으로 (\\d+)원을 지불해야 한다\\.$")

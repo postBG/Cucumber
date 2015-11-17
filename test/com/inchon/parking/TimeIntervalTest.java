@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Test;
 
 public class TimeIntervalTest {
+	private TimeService timeService;
+
 	@Test
 	public void durationLessThanHour() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-16 00:00:00", "2015-11-16 00:01:00");
@@ -23,9 +25,9 @@ public class TimeIntervalTest {
 	@Test
 	public void durationListForWeekdayOnly() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-16 00:00:00", "2015-11-16 01:01:00");
-		List<ParkingDuration> durations = timeInterval.durationList();
+		List<ParkingDuration> durations = timeInterval.durationList(timeService);
 		assertThat(durations.size(),is(1));
 		assertThat(durations.get(0).getDurationInMinutes(),is(61));
-		assertThat(durations.get(0).getDayType(),is("평일"));
+		assertThat(durations.get(0).getDayType(),is(true));
 	}
 }

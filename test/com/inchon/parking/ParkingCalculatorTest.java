@@ -11,4 +11,10 @@ public class ParkingCalculatorTest {
 		ParkingCalculator parkingCalculator = new ParkingCalculator();
 		assertThat(parkingCalculator.calculate(0),is(0));
 	}
+	
+	@Test
+	public void basePriceForOneMinute() {
+		ParkingCalculator parkingCalculator = new ParkingCalculator();
+		assertThat(parkingCalculator.calculate(1),is(1200));
+	}	
 }

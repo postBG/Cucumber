@@ -33,7 +33,15 @@ public class ParkingCalculator {
 	}
 	
 	public static ParkingCalculator createWeekendParkingCalculator() {
-		return new ParkingCalculator();
+		ParkingCalculator parkingCalculator = new ParkingCalculator();
+		parkingCalculator.additionalCost = 700;
+		parkingCalculator.additionalCostTimeUnit = 15;
+		parkingCalculator.baseCost = 1400;
+		parkingCalculator.baseCostDuration = 30;
+		parkingCalculator.dailyCostLimit = 14000;
+		parkingCalculator.dailyCostLimitDuration = 5*60;
+		
+		return parkingCalculator;
 	}
 
 }

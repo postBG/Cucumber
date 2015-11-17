@@ -6,10 +6,10 @@ public class ParkingCalculator {
 		int cost = 0;
 		
 		if ( durationInMinutes >= 46 ) {
-			cost += 1200;
+			cost += ((durationInMinutes-30-1)/15+1)*600;
 		}
 		else if ( durationInMinutes >= 31 ) {
-			cost += 600;
+			cost += ((durationInMinutes-30-1)/15+1)*600;
 		}
 		if ( durationInMinutes >= 1 )
 			cost += 1200;

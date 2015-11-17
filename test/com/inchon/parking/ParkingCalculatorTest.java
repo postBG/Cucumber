@@ -6,7 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 
 public class ParkingCalculatorTest {
-	ParkingCalculator parkingCalculator = new ParkingCalculator();
+	ParkingCalculator parkingCalculator = ParkingCalculator.createWeekDayParkingCalculator();
 	
 	@Test
 	public void basePriceForZeroMinute() {

@@ -44,7 +44,7 @@ public class TimeIntervalTest {
 	@Test
 	public void durationListForWeekdayOnly() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-16 00:00:00", "2015-11-16 01:01:00");
-		List<ParkingDuration> durations = timeInterval.durationList(timeService);
+		List<ParkingDuration> durations = timeInterval.durationList(timeService, new ParkingDurationGenerator());
 		assertThat(durations.size(),is(1));
 		assertThat(durations.get(0).getDurationInMinutes(),is(61));
 		assertThat(durations.get(0).isWeekend(),is(false));
@@ -53,7 +53,7 @@ public class TimeIntervalTest {
 	@Test
 	public void durationListForTwoWeekdays() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-11 00:00:00", "2015-11-13 01:01:00");
-		List<ParkingDuration> durations = timeInterval.durationList(timeService);
+		List<ParkingDuration> durations = timeInterval.durationList(timeService, new ParkingDurationGenerator());
 		assertThat(durations.size(),is(1));
 		assertThat(durations.get(0).getDurationInMinutes(),is(2*24*60+61));
 		assertThat(durations.get(0).isWeekend(),is(false));
@@ -62,7 +62,7 @@ public class TimeIntervalTest {
 	@Test
 	public void durationListForWeekEndOnly() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-17 00:00:00", "2015-11-17 01:01:00");
-		List<ParkingDuration> durations = timeInterval.durationList(timeService);
+		List<ParkingDuration> durations = timeInterval.durationList(timeService, new ParkingDurationGenerator());
 		assertThat(durations.size(),is(1));
 		assertThat(durations.get(0).getDurationInMinutes(),is(61));
 		assertThat(durations.get(0).isWeekend(),is(true));
@@ -71,7 +71,7 @@ public class TimeIntervalTest {
 	@Test
 	public void durationForMixedDays() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-16 23:59:00", "2015-11-17 00:01:00");
-		List<ParkingDuration> durations = timeInterval.durationList(timeService);
+		List<ParkingDuration> durations = timeInterval.durationList(timeService, new ParkingDurationGenerator());
 		assertThat(durations.size(),is(2));
 		assertThat(durations.get(0).getDurationInMinutes(),is(1));
 		assertThat(durations.get(0).isWeekend(),is(false));
@@ -82,7 +82,7 @@ public class TimeIntervalTest {
 	@Test
 	public void durationForTwoMixedDays() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-15 23:59:00", "2015-11-17 00:01:00");
-		List<ParkingDuration> durations = timeInterval.durationList(timeService);
+		List<ParkingDuration> durations = timeInterval.durationList(timeService, new ParkingDurationGenerator());
 		assertThat(durations.size(),is(2));
 		assertThat(durations.get(0).getDurationInMinutes(),is(24*60+1));
 		assertThat(durations.get(0).isWeekend(),is(false));
@@ -93,7 +93,7 @@ public class TimeIntervalTest {
 	@Test
 	public void durationForTwoAnyMixedDays() {
 		TimeInterval timeInterval = new TimeInterval("2015-11-16 23:59:00", "2015-11-18 00:01:00");
-		List<ParkingDuration> durations = timeInterval.durationList(timeService);
+		List<ParkingDuration> durations = timeInterval.durationList(timeService, new ParkingDurationGenerator());
 		assertThat(durations.size(),is(3));
 		assertThat(durations.get(0).getDurationInMinutes(),is(1));
 		assertThat(durations.get(0).isWeekend(),is(false));

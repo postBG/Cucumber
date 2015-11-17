@@ -79,7 +79,7 @@ public class ShortTermParkingLotStepDefinitions {
 			};
 		};
 		
-		parkingDurations = timeInterval.durationList(timeService);
+		parkingDurations = timeInterval.durationList(timeService, new ParkingDurationGenerator());
 	}	
 	
 	@Then("^나는 주차요금으로 (\\d+)원을 지불해야 한다\\.$")

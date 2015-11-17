@@ -24,6 +24,7 @@ public class TimeInterval {
 	}
 
 	public List<ParkingDuration> durationList(TimeService timeService) {
+		boolean weekend = timeService.isWeekend(startDate);
 		return null;
 	}
 

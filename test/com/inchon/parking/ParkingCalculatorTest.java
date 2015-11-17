@@ -6,17 +6,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 
 public class ParkingCalculatorTest {
+	ParkingCalculator parkingCalculator = new ParkingCalculator();
+	
 	@Test
-	public void basePrice() {
-		ParkingCalculator parkingCalculator = new ParkingCalculator();
+	public void basePriceForZeroMinute() {
 		assertThat(parkingCalculator.calculate(0),is(0));
 	}
 	
 	@Test
-	public void basePriceForOneMinute() {
-		ParkingCalculator parkingCalculator = new ParkingCalculator();
+	public void basePrice() {
 		assertThat(parkingCalculator.calculate(1),is(1200));
 		assertThat(parkingCalculator.calculate(2),is(1200));
+		assertThat(parkingCalculator.calculate(30),is(1200));
 	}
 	
 	

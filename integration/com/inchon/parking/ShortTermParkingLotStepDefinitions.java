@@ -95,18 +95,24 @@ public class ShortTermParkingLotStepDefinitions {
 		else {
 			int cost = 0;
 
-			for ( ParkingDuration parkingDuration : parkingDurations ) {
-				if ( parkingDuration.isWeekend() ) {
-					ParkingCalculator weekEndparkingCalculator = ParkingCalculator.createWeekendParkingCalculator();
-					cost += weekEndparkingCalculator.calculate(parkingDuration.getDurationInMinutes());
-				}
-				else {
-					ParkingCalculator weekDayParkingCalculator = ParkingCalculator.createWeekDayParkingCalculator();
-					cost += weekDayParkingCalculator.calculate(parkingDuration.getDurationInMinutes());
-				}
-			}
+			cost = calculateCombined(parkingDurations);
 			
 			assertThat(cost,is(expectedPrice));
 		}
+	}
+
+	private int calculateCombined(List<ParkingDuration> durations) {
+		int cost = 0;
+		for ( ParkingDuration parkingDuration : durations ) {
+			if ( parkingDuration.isWeekend() ) {
+				ParkingCalculator weekEndparkingCalculator = ParkingCalculator.createWeekendParkingCalculator();
+				cost += weekEndparkingCalculator.calculate(parkingDuration.getDurationInMinutes());
+			}
+			else {
+				ParkingCalculator weekDayParkingCalculator = ParkingCalculator.createWeekDayParkingCalculator();
+				cost += weekDayParkingCalculator.calculate(parkingDuration.getDurationInMinutes());
+			}
+		}
+		return cost;
 	}
 }

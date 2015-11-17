@@ -32,9 +32,14 @@ public class ParkingCalculatorTest {
 	}
 	
 	@Test
-	public void additionalPriceForMoreThanFiveHour() {
+	public void dailyLimitPrice() {
 		assertThat(parkingCalculator.calculate(5*60),is(12000));
 		assertThat(parkingCalculator.calculate(5*60+1),is(12000));
 	}
-	
+
+	@Test
+	public void priceForMoreThanDay() {
+		assertThat(parkingCalculator.calculate(24*60+1),is(13200));
+	}
+
 }
